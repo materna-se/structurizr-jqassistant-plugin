@@ -1,0 +1,21 @@
+<jqassistant-plugin xmlns="http://schema.jqassistant.org/plugin/v2.4"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://schema.jqassistant.org/plugin/v2.4 https://jqassistant.github.io/jqassistant/current/schema/jqassistant-plugin-v2.4.xsd"
+                    name="Structurizr jQAssistant Plugin" id="jqa.plugin.structurizr"
+                    version="${project.version}">
+    <description>${project.description}</description>
+    <model>
+        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.ComponentDescriptor</class>
+        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.ContainerDescriptor</class>
+        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.ElementDescriptor</class>
+        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.ModelDescriptor</class>
+        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.PersonDescriptor</class>
+        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.StructurizrDescriptor</class>
+        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.StructurizrFileDescriptor</class>
+        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.SystemDescriptor</class>
+        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.WorkspaceDescriptor</class>
+    </model>
+    <scanner>
+        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.StructurizrWorkspaceScannerPlugin</class>
+    </scanner>
+</jqassistant-plugin>

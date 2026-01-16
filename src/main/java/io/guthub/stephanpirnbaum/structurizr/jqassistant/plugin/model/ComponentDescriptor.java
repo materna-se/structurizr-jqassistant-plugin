@@ -1,0 +1,15 @@
+package io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model;
+
+import com.buschmais.xo.neo4j.api.annotation.Label;
+import io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.report.StructurizrLanguage;
+
+/**
+ * Descriptor for a {@link com.structurizr.model.Component}.
+ *
+ * @author Stephan Pirnbaum
+ */
+@StructurizrLanguage(StructurizrLanguage.StructurizrLanguageElement.Component)
+@Label("Component")
+public interface ComponentDescriptor extends ElementDescriptor {
+
+}
