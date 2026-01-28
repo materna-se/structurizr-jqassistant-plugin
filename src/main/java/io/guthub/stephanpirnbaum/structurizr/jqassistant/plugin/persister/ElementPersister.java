@@ -107,7 +107,7 @@ public class ElementPersister {
         labels.add("Structurizr");
         labels.add(typeLabel);
         labels.addAll(element.getTagsAsSet());
-        return ":" + String.join(":", labels).replaceAll(" ", "");
+        return ":" + String.join(":", labels).replaceAll(" ", "_");
     }
 
     private String buildDescriptionString(Element element) {

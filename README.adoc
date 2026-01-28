@@ -1,0 +1,179 @@
+= structurizr-jqassistant-plugin
+
+The `structurizr-jqassistant-plugin` allows the evaluation of Structurizr models defined in a `.dsl`-file using jQAssistant. It scans the defined model into the Neo4j graph database and therewith allows for validating source code against the documented architecture.
+
+== Configuring the `structurizr-jqassistant-plugin`
+
+The plugin must be specified on the configuration of jQAssistant either by extending the `.jqassistant.yml` file or by putting it into the configuration section of the `jqassistant-maven-plugin` in the `pom.xml`.
+
+Additionally, it must be configured where the `.dsl` file resides.
+
+[source, yaml]
+.Example configuration
+----
+jqassistant:
+  plugins:
+    - group-id: io.github.stephanpirnbaum <1>
+      artifact-id: structurizr-jqassistant-plugin
+      version: ${structurizr-jqassistant-plugin.version}
+  scan:
+    include:
+      files:
+        - ${project.basedir}/documentation/structurizr/workspace.dsl <2>
+----
+<1> Dependency to the Structurizr plugin
+<2> Location of the `.dsl`-files. Needs to be set accordingly.
+
+== Graph Structure
+
+The Structurizr DSL defines the `Element` as a generic base element from which concrete elements like `Person` and `Container` extend. The jQAssistant plugin currently supports the following elements and marks them with the respective label:
+
+* `Component` &rarr; `:Structurizr:Element:Component`
+* `Container` &rarr; `:Structurizr:Element:Container`
+* `SoftwareSysten` &rarr; `:Structurizr:Element:System`
+* `Person` &rarr; `:Structurizr:Element:Person`
+
+=== Additional Labels
+
+Additionally, if a custom element is defined as an archetype, e.g. as shown below, the defined tag will be added as a label. This is also true for tags on standard elements. For relations, the default is `DEPENDS_ON`, which can also be overridden.
+
+NOTE:: If multiple tags are specified on a relation, one will be selected as in Neo4j, a relation can only have one label.
+
+[source]
+.workspace.dsl
+----
+workspace "Example System" "Description" {
+    model {
+        archetypes {
+            reactUi = container {
+                tag "UI"
+            }
+        }
+
+        online_shop = softwareSystem "Online Shop" {
+            order = container "Order Backend" {
+                tag "BoundedContext" // <1>
+            }
+            ui = reactUi "Shop UI" // <2>
+
+            ui -> order "Ruft auf" {
+                tag "DEFINES_DEPENDENCY" // <3>
+            }
+        }
+    }
+}
+----
+<1> Adds the label "BoundedContext" to the node which represents the container
+<2> The resulting node will have the label "UI" as defined by the archetype
+<3> The resulting relation will have the label "DEFINES_DEPENDENCY"
+
+=== Additional Properties
+
+==== Alias
+
+The alias is supported on elements and will be present as a property "alias" on the node in Neo4j.
+
+[source]
+.workspace.dsl
+----
+workspace "Example System" "Description" {
+    model {
+        archetypes {
+            reactUi = container {
+                tag "UI"
+            }
+        }
+
+        online_shop = softwareSystem "Online Shop" // <1>
+    }
+}
+----
+<1> "online_shop" will be stored in the `alias` property.
+
+==== Name
+
+The name is supported on elements and will be present as a property "name" on the node in Neo4j.
+
+[source]
+.workspace.dsl
+----
+workspace "Example System" "Description" {
+    model {
+        archetypes {
+            reactUi = container {
+                tag "UI"
+            }
+        }
+
+        online_shop = softwareSystem "Online Shop" // <1>
+    }
+}
+----
+<1> "Online Shop" will be stored in the `name` property.
+
+==== Description
+
+The description property is supported on both relations and elements and will be present as a property "description" on the relation or node, respectively, in Neo4j.
+
+[source]
+.workspace.dsl
+----
+workspace "Example System" "Description" {
+    model {
+        archetypes {
+            reactUi = container {
+                tag "UI"
+            }
+        }
+
+        online_shop = softwareSystem "Online Shop" {
+            description "Shop Description" // <1>
+    }
+}
+----
+<1> "Shop Description" will be stored in the `description` property.
+
+==== Technology
+
+The technology property is supported on both relations and elements and will be present as a property "technologies" on the relation or node, respectively, in Neo4j as an array. Multiple technologies can be specified as a comma-separated list.
+
+[source]
+.workspace.dsl
+----
+workspace "Example System" "Description" {
+    model {
+        archetypes {
+            reactUi = container {
+                tag "UI"
+            }
+        }
+
+        online_shop = softwareSystem "Online Shop" {
+            technology "Java, React" // <1>
+    }
+}
+----
+<1> "Java" and "React" will be stored in the `technologies` list property.
+
+==== Properties
+
+Key-value properties are supported on both relations and elements. They will be present on the relation or node, respectively, in Neo4j as properties of the same name as the key.
+
+[source]
+.workspace.dsl
+----
+workspace "Example System" "Description" {
+    model {
+        archetypes {
+            reactUi = container {
+                tag "UI"
+            }
+        }
+
+        online_shop = softwareSystem "Online Shop" {
+            properteies {
+                "Key" "Value" // <1>
+    }
+}
+----
+<1> "Key" will be a property with the value "Value".

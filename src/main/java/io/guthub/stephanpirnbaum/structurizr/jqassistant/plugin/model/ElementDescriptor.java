@@ -1,18 +1,17 @@
 package io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model;
 
-import com.buschmais.jqassistant.core.store.api.model.Descriptor;
 import com.buschmais.xo.neo4j.api.annotation.Label;
 import com.buschmais.xo.neo4j.api.annotation.Relation;
 
 import java.util.List;
 
 /**
- * Base descriptor for all elements of the mode of the Structurizr {@link com.structurizr.Workspace}.
+ * Base descriptor for all elements of the model of the Structurizr {@link com.structurizr.Workspace}.
  *
  * @author Stephan Pirnbaum
  */
 @Label("Element")
-public interface ElementDescriptor extends Descriptor {
+public interface ElementDescriptor extends StructurizrDescriptor {
 
     String getAlias();
 

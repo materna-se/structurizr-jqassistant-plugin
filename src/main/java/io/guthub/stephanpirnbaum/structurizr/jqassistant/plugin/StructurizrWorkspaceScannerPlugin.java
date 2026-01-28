@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Scanner plug-in to enrich the graph based on a C4-.puml-file.
+ * Scanner plug-in to enrich the graph based on a Structurizr DSL file.
  *
  * @author Stephan Pirnbaum
  */

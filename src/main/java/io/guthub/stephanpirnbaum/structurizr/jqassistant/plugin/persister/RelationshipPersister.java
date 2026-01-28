@@ -10,6 +10,7 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -39,26 +40,24 @@ public class RelationshipPersister {
 
     private String buildStringRepresentation(String sourceAlias, String targetAlias, Relationship relationship) {
         String label;
-        if (relationship.getTagsAsSet().size() > 1) {
-            label = relationship.getTagsAsSet().stream().findFirst().get();
+        Set<String> tags = relationship.getTagsAsSet();
+        // default name of Relationships
+        tags.remove("Relationship");
+        if (tags.size() > 1) {
+            label = tags.stream().findFirst().get();
             log.warn("Relation between {} and {} has more then one tag. Using {}", sourceAlias, targetAlias, label);
-        } else if (relationship.getTagsAsSet().size() == 1) {
-            label = relationship.getTagsAsSet().stream().findFirst().get();
+        } else if (tags.size() == 1) {
+            label = tags.stream().findFirst().get();
         } else {
             label = "DEPENDS_ON";
             log.warn("Relation between {} and {} has no tags. Using default {}", sourceAlias, targetAlias, label);
         }
 
-        return String.format(":%s{%s%s%s%s}",
-                label,
-                buildNameString(relationship),
+        return String.format(":%s{%s%s%s}",
+                label.replaceAll(" ", "_"),
                 buildDescriptionString(relationship),
                 buildTechnologiesString(relationship),
                 buildPropertiesString(relationship));
-    }
-
-    private String buildNameString(Relationship relationship) {
-        return "name: \"" + relationship.getCanonicalName() + "\"";
     }
 
 
@@ -66,7 +65,7 @@ public class RelationshipPersister {
         if (StringUtils.isEmpty(relationship.getDescription())) {
             return "";
         } else {
-            return ", description: \"" + relationship.getDescription() + "\"";
+            return "description: \"" + relationship.getDescription() + "\"";
         }
     }
 
