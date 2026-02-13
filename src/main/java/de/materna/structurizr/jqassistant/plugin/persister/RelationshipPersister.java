@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class RelationshipPersister {
 
     private static final String relCreationTemplate =
-            "MATCH (s:C4), (t:C4) " +
+            "MATCH (s:Structurizr:Element), (t:Structurizr:Element) " +
             "WHERE id(s) = %d AND id(t) = %d " +
             "MERGE (s)-[d%s]->(t) " +
             "RETURN d";
