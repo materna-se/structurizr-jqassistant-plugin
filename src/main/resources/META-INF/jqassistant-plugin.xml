@@ -5,17 +5,17 @@
                     version="${project.version}">
     <description>${project.description}</description>
     <model>
-        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.ComponentDescriptor</class>
-        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.ContainerDescriptor</class>
-        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.ElementDescriptor</class>
-        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.ModelDescriptor</class>
-        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.PersonDescriptor</class>
-        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.StructurizrDescriptor</class>
-        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.StructurizrFileDescriptor</class>
-        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.SystemDescriptor</class>
-        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.WorkspaceDescriptor</class>
+        <class>de.materna.structurizr.jqassistant.plugin.model.ComponentDescriptor</class>
+        <class>de.materna.structurizr.jqassistant.plugin.model.ContainerDescriptor</class>
+        <class>de.materna.structurizr.jqassistant.plugin.model.ElementDescriptor</class>
+        <class>de.materna.structurizr.jqassistant.plugin.model.ModelDescriptor</class>
+        <class>de.materna.structurizr.jqassistant.plugin.model.PersonDescriptor</class>
+        <class>de.materna.structurizr.jqassistant.plugin.model.StructurizrDescriptor</class>
+        <class>de.materna.structurizr.jqassistant.plugin.model.StructurizrFileDescriptor</class>
+        <class>de.materna.structurizr.jqassistant.plugin.model.SystemDescriptor</class>
+        <class>de.materna.structurizr.jqassistant.plugin.model.WorkspaceDescriptor</class>
     </model>
     <scanner>
-        <class>io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.StructurizrWorkspaceScannerPlugin</class>
+        <class>de.materna.structurizr.jqassistant.plugin.StructurizrWorkspaceScannerPlugin</class>
     </scanner>
 </jqassistant-plugin>

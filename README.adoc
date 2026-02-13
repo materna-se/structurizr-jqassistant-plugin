@@ -13,7 +13,7 @@ Additionally, it must be configured where the `.dsl` file resides.
 ----
 jqassistant:
   plugins:
-    - group-id: io.github.stephanpirnbaum <1>
+    - group-id: de.materna.structurizr <1>
       artifact-id: structurizr-jqassistant-plugin
       version: ${structurizr-jqassistant-plugin.version}
   scan:

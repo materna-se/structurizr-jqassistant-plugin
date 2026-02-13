@@ -1,7 +1,7 @@
-package io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model;
+package de.materna.structurizr.jqassistant.plugin.model;
 
 import com.buschmais.xo.neo4j.api.annotation.Label;
-import io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.report.StructurizrLanguage;
+import de.materna.structurizr.jqassistant.plugin.report.StructurizrLanguage;
 
 /**
  * Descriptor for a {@link com.structurizr.model.Container}.

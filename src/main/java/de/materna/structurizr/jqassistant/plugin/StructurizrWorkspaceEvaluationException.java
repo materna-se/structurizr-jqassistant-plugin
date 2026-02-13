@@ -1,4 +1,4 @@
-package io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin;
+package de.materna.structurizr.jqassistant.plugin;
 
 /**
  * Exception to represent issues during processing a Structurizr workspace.

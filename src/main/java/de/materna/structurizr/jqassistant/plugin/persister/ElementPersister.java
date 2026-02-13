@@ -1,4 +1,4 @@
-package io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.persister;
+package de.materna.structurizr.jqassistant.plugin.persister;
 
 import com.buschmais.jqassistant.core.store.api.Store;
 import com.buschmais.xo.api.Query;
@@ -8,14 +8,18 @@ import com.structurizr.model.Container;
 import com.structurizr.model.Element;
 import com.structurizr.model.Person;
 import com.structurizr.model.SoftwareSystem;
-import io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.*;
+import de.materna.structurizr.jqassistant.plugin.model.ElementDescriptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**

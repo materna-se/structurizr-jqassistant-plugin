@@ -1,9 +1,13 @@
-package io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.report;
+package de.materna.structurizr.jqassistant.plugin.report;
 
 import com.buschmais.jqassistant.core.report.api.SourceProvider;
 import com.buschmais.jqassistant.core.report.api.model.Language;
 import com.buschmais.jqassistant.core.report.api.model.LanguageElement;
-import io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.*;
+import de.materna.structurizr.jqassistant.plugin.model.ComponentDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.ContainerDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.ElementDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.PersonDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.SystemDescriptor;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

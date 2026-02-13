@@ -1,9 +1,17 @@
-package io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.persister;
+package de.materna.structurizr.jqassistant.plugin.persister;
 
 import com.buschmais.jqassistant.core.store.api.Store;
 import com.structurizr.Workspace;
-import com.structurizr.model.*;
-import io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.*;
+import com.structurizr.model.Element;
+import com.structurizr.model.Model;
+import com.structurizr.model.Relationship;
+import de.materna.structurizr.jqassistant.plugin.model.ComponentDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.ContainerDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.ElementDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.ModelDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.PersonDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.SystemDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.WorkspaceDescriptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

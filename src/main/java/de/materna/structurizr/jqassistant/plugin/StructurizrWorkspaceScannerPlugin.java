@@ -1,4 +1,4 @@
-package io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin;
+package de.materna.structurizr.jqassistant.plugin;
 
 import com.buschmais.jqassistant.core.scanner.api.Scanner;
 import com.buschmais.jqassistant.core.scanner.api.ScannerPlugin.Requires;
@@ -9,10 +9,10 @@ import com.buschmais.jqassistant.plugin.common.api.scanner.filesystem.FileResour
 import com.structurizr.Workspace;
 import com.structurizr.dsl.StructurizrDslParser;
 import com.structurizr.dsl.StructurizrDslParserException;
-import io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.StructurizrDescriptor;
-import io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.StructurizrFileDescriptor;
-import io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.WorkspaceDescriptor;
-import io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.persister.WorkspacePersister;
+import de.materna.structurizr.jqassistant.plugin.model.StructurizrDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.StructurizrFileDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.WorkspaceDescriptor;
+import de.materna.structurizr.jqassistant.plugin.persister.WorkspacePersister;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 

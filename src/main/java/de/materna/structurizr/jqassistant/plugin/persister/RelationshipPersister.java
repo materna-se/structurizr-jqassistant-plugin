@@ -1,9 +1,9 @@
-package io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.persister;
+package de.materna.structurizr.jqassistant.plugin.persister;
 
 import com.buschmais.jqassistant.core.store.api.Store;
 import com.structurizr.Workspace;
 import com.structurizr.model.Relationship;
-import io.guthub.stephanpirnbaum.structurizr.jqassistant.plugin.model.ElementDescriptor;
+import de.materna.structurizr.jqassistant.plugin.model.ElementDescriptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
