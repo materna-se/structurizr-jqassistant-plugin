@@ -29,7 +29,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.asciidoctorj>3.0.0</version.asciidoctorj>
-        <version.jqassistant>2.8.0</version.jqassistant>
+        <version.jqassistant>2.9.0</version.jqassistant>
         <version.lombok>1.18.42</version.lombok>
         <version.slf4j>2.0.17</version.slf4j>
         <version.structurizr>5.0.3</version.structurizr>
