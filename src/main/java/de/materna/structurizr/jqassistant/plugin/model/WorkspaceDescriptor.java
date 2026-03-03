@@ -11,6 +11,10 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
 @Label("Workspace")
 public interface WorkspaceDescriptor extends StructurizrDescriptor {
 
+    void setName(String name);
+
+    String getName();
+
     void setModel(ModelDescriptor model);
 
     @Relation("CONTAINS")
