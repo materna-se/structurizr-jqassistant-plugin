@@ -36,7 +36,7 @@ public class StructurizrWorkspaceScannerPlugin extends AbstractScannerPlugin<Fil
             try (InputStream is = fileResource.createStream()) {
                 String fileContent = IOUtils.toString(is);
                 StructurizrDslParser parser = new StructurizrDslParser();
-                parser.parse(fileContent);
+                parser.parse(fileContent, fileResource.getFile());
                 parser.getWorkspace();
                 return true;
             } catch (Exception e) {
@@ -53,7 +53,7 @@ public class StructurizrWorkspaceScannerPlugin extends AbstractScannerPlugin<Fil
         try (InputStream is = fileResource.createStream()) {
             String fileContent = IOUtils.toString(is);
             StructurizrDslParser parser = new StructurizrDslParser();
-            parser.parse(fileContent);
+            parser.parse(fileContent, fileResource.getFile());
             Workspace workspace = parser.getWorkspace();
             WorkspacePersister persister = new WorkspacePersister(getScannerContext().getStore());
             WorkspaceDescriptor workspaceDescriptor = persister.persist(workspace);

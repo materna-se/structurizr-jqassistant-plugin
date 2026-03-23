@@ -35,6 +35,7 @@ public class WorkspacePersister {
         if (workspace.getModel() != null) {
             Model model = workspace.getModel();
             ModelDescriptor modelDescriptor = store.create(ModelDescriptor.class);
+            workspaceDescriptor.setName(workspace.getName());
             workspaceDescriptor.setModel(modelDescriptor);
             Map<String, ElementDescriptor> elementIdMap = persistElements(modelDescriptor, model.getElements());
             persistRelations(elementIdMap, model.getRelationships());
