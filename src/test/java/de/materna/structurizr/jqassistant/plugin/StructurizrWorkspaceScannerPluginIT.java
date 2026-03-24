@@ -76,7 +76,7 @@ public class StructurizrWorkspaceScannerPluginIT extends AbstractPluginIT {
             String relationshipQuery = String.format(
                     "MATCH (e1:Structurizr:Element{alias: '%s'})-[d:%s%s]->(e2:Structurizr:Element{alias: '%s'}) Return count(*) AS cnt",
                     sourceAlias,
-                    StringUtils.isNotBlank(tag) ? tag : "DEPENDS_ON",
+                    StringUtils.isNotBlank(tag) ? tag : "DEFINES_DEPENDENCY",
                     StringUtils.isNotBlank(properties) ? "{" + properties + "}" : "",
                     destinationAlias
             );

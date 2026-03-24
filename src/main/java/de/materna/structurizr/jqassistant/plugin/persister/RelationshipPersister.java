@@ -10,8 +10,10 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class to persist a single {@link Relationship} from a Structurizr {@link Workspace#getModel()}.
@@ -49,21 +51,23 @@ public class RelationshipPersister {
         } else if (tags.size() == 1) {
             label = tags.stream().findFirst().get();
         } else {
-            label = "DEPENDS_ON";
-            log.warn("Relation between {} and {} has no tags. Using default {}", sourceAlias, targetAlias, label);
+            label = "DEFINES_DEPENDENCY";
+            log.debug("Relation between {} and {} has no tags. Using default {}", sourceAlias, targetAlias, label);
         }
 
-        return String.format(":%s{%s%s%s}",
+        String description = buildDescriptionString(relationship);
+        String technologies = buildTechnologiesString(relationship);
+        String properties = buildPropertiesString(relationship);
+
+        return String.format(":%s{%s}",
                 label.replaceAll(" ", "_"),
-                buildDescriptionString(relationship),
-                buildTechnologiesString(relationship),
-                buildPropertiesString(relationship));
+                Stream.of(description, technologies, properties).filter(Objects::nonNull).collect(Collectors.joining(", ")));
     }
 
 
     private String buildDescriptionString(Relationship relationship) {
         if (StringUtils.isEmpty(relationship.getDescription())) {
-            return "";
+            return null;
         } else {
             return "description: \"" + relationship.getDescription() + "\"";
         }
@@ -71,9 +75,9 @@ public class RelationshipPersister {
 
     private String buildPropertiesString(Relationship relationship) {
         if (MapUtils.isEmpty(relationship.getProperties())) {
-            return "";
+            return null;
         } else {
-            return ", " + relationship.getProperties().entrySet()
+            return relationship.getProperties().entrySet()
                     .stream()
                     .map(e -> e.getKey() + ": \"" + e.getValue() + "\"")
                     .collect(Collectors.joining(", "));
@@ -82,9 +86,9 @@ public class RelationshipPersister {
 
     private String buildTechnologiesString(Relationship relationship) {
         if (StringUtils.isEmpty(relationship.getTechnology())) {
-            return "";
+            return null;
         } else {
-            return ", technologies: [" +
+            return "technologies: [" +
                     Arrays.stream(relationship.getTechnology().split(","))
                             .map(s -> "\"" + s + "\"")
                             .collect(Collectors.joining(", "))

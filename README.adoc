@@ -35,7 +35,7 @@ The Structurizr DSL defines the `Element` as a generic base element from which c
 
 === Additional Labels
 
-Additionally, if a custom element is defined as an archetype, e.g. as shown below, the defined tag will be added as a label. This is also true for tags on standard elements. For relations, the default is `DEPENDS_ON`, which can also be overridden.
+Additionally, if a custom element is defined as an archetype, e.g. as shown below, the defined tag will be added as a label. This is also true for tags on standard elements. For relations, the default is `DEFINES_DEPENDENCY`, which can also be overridden.
 
 NOTE:: If multiple tags are specified on a relation, one will be selected as in Neo4j, a relation can only have one label.
 

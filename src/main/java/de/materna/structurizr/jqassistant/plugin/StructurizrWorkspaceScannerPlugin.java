@@ -15,6 +15,7 @@ import de.materna.structurizr.jqassistant.plugin.model.WorkspaceDescriptor;
 import de.materna.structurizr.jqassistant.plugin.persister.WorkspacePersister;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,6 +60,7 @@ public class StructurizrWorkspaceScannerPlugin extends AbstractScannerPlugin<Fil
     }
 
     private File resolveWorkspace(FileResource fileResource, String path) throws URISyntaxException, IOException {
+        File file = fileResource.getFile();
         if ("jar".equals(new URI(path).getScheme())) {
             /*
              * Workspace is part of a jQAssistant Plug-In
@@ -69,14 +71,17 @@ public class StructurizrWorkspaceScannerPlugin extends AbstractScannerPlugin<Fil
             URI jarURI = resolveJarURI(new URI(path));
 
             try (JarFile jar = new JarFile(Path.of(jarURI).toFile())) {
-                jar
+                return jar
                         .stream()
                         .filter(f -> f.getName().endsWith(".dsl") || f.getName().endsWith(".json")) // included DSLs and Themes
-                        .forEach(entry -> extract(jar, entry, tempDir));
+                        .map(entry -> extract(jar, entry, tempDir))
+                        .filter(temp -> file.toPath().endsWith(temp.getLeft().getName()))
+                        .map(Pair::getRight)
+                        .map(Path::toFile)
+                        .findFirst().orElse(null);
             }
-            return null;
         } else {
-            return fileResource.getFile();
+            return file;
         }
     }
 
@@ -89,7 +94,7 @@ public class StructurizrWorkspaceScannerPlugin extends AbstractScannerPlugin<Fil
         return URI.create(ssp.substring(0, bang));      // /.../artifact.jar
     }
 
-    private void extract(JarFile jar, JarEntry entry, Path targetDir) {
+    private Pair<JarEntry, Path> extract(JarFile jar, JarEntry entry, Path targetDir) {
         try {
             Path target = targetDir.resolve(entry.getName());
 
@@ -97,6 +102,7 @@ public class StructurizrWorkspaceScannerPlugin extends AbstractScannerPlugin<Fil
             try (InputStream in = jar.getInputStream(entry)) {
                 Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
             }
+            return Pair.of(entry, target);
         } catch (IOException ex) {
             throw new RuntimeException("Fehler beim Entpacken von " + entry.getName(), ex);
         }
