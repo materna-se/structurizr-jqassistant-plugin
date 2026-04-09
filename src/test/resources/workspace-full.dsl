@@ -85,6 +85,12 @@ workspace "Online Shop" {
         }
 
         user -> ui "Uses"
+
+        env = deploymentEnvironment "Test Env" {
+            deploymentNode "Test Node" {
+                containerInstance catalog_backend
+            }
+        }
     }
 
 

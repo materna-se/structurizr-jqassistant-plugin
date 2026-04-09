@@ -39,6 +39,13 @@ public class StructurizrWorkspaceScannerPluginIT extends AbstractPluginIT {
         assertThat(query(workspaceQuery).getColumn("cnt").get(0)).isEqualTo(1L);
 
         for (Element element : this.workspace.getModel().getElements()) {
+            if (element.getTagsAsSet().contains("Deployment Node")) {
+                // Deployment Node currently not supported.
+                continue;
+            } else if (element.getTagsAsSet().contains("Container Instance")) {
+                // Deployment Node currently not supported.
+                continue;
+            }
             String technology = null;
             if (element instanceof Component) {
                 technology = ((Component) element).getTechnology();
@@ -57,7 +64,7 @@ public class StructurizrWorkspaceScannerPluginIT extends AbstractPluginIT {
         }
 
         for (Element element : this.workspace.getModel().getElements()) {
-            if (element.getParent() != null) {
+            if (element.getParent() != null && !element.getTagsAsSet().contains("Deployment Node") && !element.getTagsAsSet().contains("Container Instance")) {
                 String containsQuery = String.format(
                         "MATCH (e1:Structurizr:Element{alias: '%s'})-[:CONTAINS]->(e2:Structurizr:Element{alias: '%s'}) RETURN count(*) AS cnt",
                         element.getParent().getProperties().get("structurizr.dsl.identifier"),
