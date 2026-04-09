@@ -44,14 +44,16 @@ public class ElementPersister {
     private final Store store;
 
     public ElementDescriptor persist(Element element) {
-        String query = String.format(elementCreationTemplate, buildStringRepresentation(element));
-
-        List<Query.Result.CompositeRowObject> resultList;
-        try (Query.Result<Query.Result.CompositeRowObject> result = this.store.executeQuery(query)) {
-            resultList = IteratorUtils.toList(result.iterator());
-        }
-        if (resultList.size() == 1) {
-            return resultList.get(0).get("n", ElementDescriptor.class);
+        String stringRepresentation = buildStringRepresentation(element);
+        if (stringRepresentation != null) {
+            String query = String.format(elementCreationTemplate, stringRepresentation);
+            List<Query.Result.CompositeRowObject> resultList;
+            try (Query.Result<Query.Result.CompositeRowObject> result = this.store.executeQuery(query)) {
+                resultList = IteratorUtils.toList(result.iterator());
+            }
+            if (resultList.size() == 1) {
+                return resultList.get(0).get("n", ElementDescriptor.class);
+            }
         }
         return null;
     }
